@@ -111,7 +111,7 @@ lazy val js = project
     libraryDependencies ++= {
       val ver = version.value.stripSuffix("-SNAPSHOT") + "-SNAPSHOT"
       Seq(
-        "com.github.japgolly.scalacss" %%% "core" % ver,
+        "com.github.gmixa.scalacss" %%% "core" % ver,
         Dep.microlibsCompileTime.value % Test,
         Dep.microlibsTestUtil.value % Test,
       )
