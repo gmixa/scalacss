@@ -20,5 +20,5 @@ trait ScalatagsJsDomImplicits {
 
 class ScalatagsJsDomRenderer(s: Renderer[String]) extends Renderer[TypedTag[HTMLStyleElement]] {
   override def apply(css: Css) =
-    tags2.style(`type` := "text/css", s(css))
+    tags2.style(`type` := "text/css", s(css)).asInstanceOf[TypedTag[HTMLStyleElement]]
 }
