@@ -12,5 +12,5 @@ ThisBuild / semanticdbVersion := "4.9.8"
 ThisBuild / scalafixScalaBinaryVersion := "2.13"
 
 ThisBuild / scalafixDependencies ++= Seq(
-  "com.github.liancheng" %% "organize-imports" % "0.5.0"
+  "com.github.liancheng" %% "organize-imports" % "0.6.0"
 )
