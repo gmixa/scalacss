@@ -8,7 +8,7 @@ import utest._
 object NameGenTest extends TestSuite {
 
   override def tests = Tests {
-    "nameGenUniqueAndAscii" - {
+    test("nameGenUniqueAndAscii") - {
       val classesAmount = 1000
       val classNames = (1 to classesAmount).map(_ => NameGen.short().next(ClassNameHint("placeholder"))._1.value)
       val uniqueClassNames = classNames.toSet

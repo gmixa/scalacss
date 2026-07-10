@@ -8,8 +8,8 @@ object StyleTest extends TestSuite {
 
   override def tests = Tests {
 
-    "styleA" - {
-      "addOperator" - {
+    test("styleA") - {
+      test("addOperator") - {
         import Dsl._
 
         val s1 = StyleA(ClassName("s1"), Vector("c1", "c2", "c3").map(ClassName.apply), style(backgroundColor.blue))
@@ -37,4 +37,5 @@ object StyleTest extends TestSuite {
       }
     }
   }
+
 }

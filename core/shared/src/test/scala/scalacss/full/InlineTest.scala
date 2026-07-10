@@ -3,6 +3,8 @@ package scalacss.full
 import scala.concurrent.duration._
 import scalacss.DevDefaults._
 
+import scala.language.postfixOps
+
 //object CopyDefaultsForInline extends Defaults
 //import CopyDefaultsForInline._
 
@@ -300,7 +302,7 @@ object InlineTest extends utest.TestSuite {
   def norm(css: String) = css.trim
 
   override def tests = Tests {
-    "css1" - assertMultiline(norm(MyInline.render), norm(
+    test("css1") - assertMultiline(norm(MyInline.render), norm(
       """
         |.manual {
         |  margin: 12px;
@@ -393,7 +395,7 @@ object InlineTest extends utest.TestSuite {
         |}
       """.stripMargin))
 
-    "css2" - assertMultiline(norm(MyInline2.render), norm(
+    test("css2") - assertMultiline(norm(MyInline2.render), norm(
       """
         |.MyInline2-sb2 {
         |  margin-top: inherit;
@@ -472,7 +474,7 @@ object InlineTest extends utest.TestSuite {
         |}
       """.stripMargin))
 
-    "css3" - assertMultiline(norm(MyInline3.render), norm(
+    test("css3") - assertMultiline(norm(MyInline3.render), norm(
       """
         |.MyInline3-dup1b {
         |  word-break: break-all;
@@ -533,55 +535,55 @@ object InlineTest extends utest.TestSuite {
         |}
       """.stripMargin))
 
-    "classnames" - {
-      "manual" - assertEq(MyInline.noMacrosOrClassnameHintHere.htmlClass, "manual")
+    test("classnames") - {
+      test("manual") - assertEq(MyInline.noMacrosOrClassnameHintHere.htmlClass, "manual")
 
-      "manualF" - {
+      test("manualF") - {
         assertEq(MyInline3.innerObject.mybool(true).htmlClass, "blah-t")
         assertEq(MyInline3.innerObject.mybool(false).htmlClass, "blah-f")
       }
 
-      "everythingOk" - {
+      test("everythingOk") - {
         assertEq(MyInline2.everythingOk(true) .htmlClass, "MyInline2-everythingOk-t")
         assertEq(MyInline2.everythingOk(false).htmlClass, "MyInline2-everythingOk-f")
       }
 
-      "indent" - {
+      test("indent") - {
         assertEq(MyInline2.indent(2).htmlClass, "MyInline2-indent-2")
         assertEq(MyInline2.indent(3).htmlClass, "MyInline2-indent-3")
         assertEq(MyInline2.indent(4).htmlClass, "MyInline2-indent-4")
       }
 
-      "opbool" - {
+      test("opbool") - {
         assertEq(MyInline2.opbool(None)       .htmlClass, "MyInline2-opbool-1")
         assertEq(MyInline2.opbool(Some(true)) .htmlClass, "MyInline2-opbool-2")
         assertEq(MyInline2.opbool(Some(false)).htmlClass, "MyInline2-opbool-3")
       }
 
-      "sb1" - assertEq(MyInline2.sb1.htmlClass, "btn btn-default")
-      "sb2" - assertEq(MyInline2.sb2.htmlClass, "MyInline2-sb2 btn btn-default")
+      test("sb1") - assertEq(MyInline2.sb1.htmlClass, "btn btn-default")
+      test("sb2") - assertEq(MyInline2.sb2.htmlClass, "MyInline2-sb2 btn btn-default")
 
-      "empty" - assertEq(MyInline.empty.htmlClass, "MyInline-0001")
+      test("empty") - assertEq(MyInline.empty.htmlClass, "MyInline-0001")
 
-      "wth" - assertEq(MyInline2.`what the hell??`.htmlClass, "MyInline2-what_the_hell__")
+      test("wth") - assertEq(MyInline2.`what the hell??`.htmlClass, "MyInline2-what_the_hell__")
 
-      "dup1" - {
+      test("dup1") - {
         assertEq(MyInline3.dup1a.htmlClass, "MyInline3-dup1b")
         assertEq(MyInline3.dup1b.htmlClass, "MyInline3-dup1b-2")
       }
 
-      "dup2" - {
+      test("dup2") - {
         assertEq(MyInline3.dup2a.htmlClass, "MyInline3-dup2c")
         assertEq(MyInline3.dup2b.htmlClass, "MyInline3-dup2c-2")
         assertEq(MyInline3.dup2c.htmlClass, "MyInline3-dup2c-3")
       }
 
-      "innerObject_1" - assertEq(MyInline3.innerObject.depth1.htmlClass, "MyInline3-innerObject-depth1")
-      "innerObject_2" - assertEq(MyInline3.innerObject.andAgain.depth2.htmlClass, "MyInline3-innerObject-andAgain-depth2")
+      test("innerObject_1") - assertEq(MyInline3.innerObject.depth1.htmlClass, "MyInline3-innerObject-depth1")
+      test("innerObject_2") - assertEq(MyInline3.innerObject.andAgain.depth2.htmlClass, "MyInline3-innerObject-andAgain-depth2")
 
     }
 
-    "keyframes" - assertMultiline(norm(MyInlineWithKeyframes.render), norm("""
+    test("keyframes") - assertMultiline(norm(MyInlineWithKeyframes.render), norm("""
        |@keyframes MyInlineWithKeyframes-kf1 {
        |  0% {
        |    height: 100px;
@@ -648,7 +650,7 @@ object InlineTest extends utest.TestSuite {
        |}
      """.stripMargin))
 
-    "complexCond" - assertMultiline(norm(MyInlineComplexCond.render), norm(
+    test("complexCond") - assertMultiline(norm(MyInlineComplexCond.render), norm(
       """.manual {
         |  margin: 12px;
         |  padding: 0.5ex;
@@ -721,7 +723,7 @@ object InlineTest extends utest.TestSuite {
         |}
       """.stripMargin))
 
-    "fontFaces" - assertMultiline(norm(MyInlineWithFontFace.render), norm("""
+    test("fontFaces") - assertMultiline(norm(MyInlineWithFontFace.render), norm("""
          |@font-face {
          |  font-family: myFont;
          |  src: url(font.woff);

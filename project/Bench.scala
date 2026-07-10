@@ -22,7 +22,7 @@ object BenchBuild {
 
   lazy val bench =
     benchModule("bench", identity)
-      .configure(commonSettings.jvm)
+      .configure(commonSettings.js)
       .aggregate(benchReactWith, benchReactWithout, benchBig)
       .settings(
         jsSizes       := jsSizesTask.value,

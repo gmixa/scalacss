@@ -6,7 +6,7 @@ import org.scalajs.dom.{HTMLStyleElement, document}
 import scalacss.ScalaCssReact._
 import scalacss.TestUtil._
 import scalacss.internal.mutable.StyleSheetRegistry
-import utest._
+import utest.{TestSuite, Tests, test}
 
 object ReactTest extends TestSuite {
   import scalacss.DevDefaults._
@@ -59,29 +59,29 @@ object ReactTest extends TestSuite {
 
   override def tests = Tests {
 
-    "styleReactElement" - {
+    test("styleReactElement") - {
       val html = ReactDOMServer.renderToStaticMarkup(MyStyles.render[VdomElement])
       assertStyle(html, expectedStyleTag1)
     }
 
-    "styleHtmlElement" - {
+    test("styleHtmlElement") - {
       val html = MyStyles.render[HTMLStyleElement].outerHTML
       assertStyle(html, expectedStyleTag1)
     }
 
-    "simple" - {
+    test("simple") - {
       val el = <.input(^.`type` := "text", MyStyles.input, ^.defaultValue := "ah")
       val html = ReactDOMServer.renderToStaticMarkup(el)
       assertEq(html, """<input type="text" class="ReactTest_MyStyles-input" value="ah"/>""")
     }
 
-    "addClassName" - {
+    test("addClassName") - {
       val el = <.button(MyStyles.bootstrappy)
       val html = ReactDOMServer.renderToStaticMarkup(el)
       assertEq(html, """<button class="btn btn-default"></button>""")
     }
 
-    "addToDocumentOnRegistration" - {
+    test("addToDocumentOnRegistration") - {
       val registry = new StyleSheetRegistry
       registry.register(MyStyles, MyStyles2)
       def count = document.head.childElementCount

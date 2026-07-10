@@ -1,12 +1,14 @@
-name := "ScalaCSS"
+import javax.print.attribute.DateTimeSyntax
 
+name := "ScalaCSS"
+scalaVersion := "3.8.4"
 ThisBuild / homepage      := Some(url("https://github.com/japgolly/scalacss"))
 ThisBuild / licenses      += ("Apache-2.0", url("http://opensource.org/licenses/Apache-2.0"))
 ThisBuild / organization  := "com.github.gmixa.scalacss"
 ThisBuild / shellPrompt   := ((s: State) => Project.extract(s).currentRef.project + "> ")
 ThisBuild / startYear     := Some(2015)
 ThisBuild / versionScheme := Some("early-semver")
-
+Test / fork := false
 // Mutability & NameGen causes occasional test failures
 ThisBuild / parallelExecution := false
 

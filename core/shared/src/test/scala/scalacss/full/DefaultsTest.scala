@@ -4,11 +4,13 @@ import japgolly.microlibs.testutil.TestUtil._
 import scalacss._
 import utest._
 
+import scala.language.postfixOps
+
 object DefaultsTest extends TestSuite {
 
   override def tests = Tests {
-    "dev"  - Dev .test()
-    "prod" - Prod.test()
+    test("dev")  - Dev .test()
+    test("prod") - Prod.test()
   }
 
   class SharedStyles(implicit reg: StyleSheet.Register) extends StyleSheet.Inline {

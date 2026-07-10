@@ -56,10 +56,10 @@ object Demo {
         )
       )
   }
-
+  import scalacss.internal.mutable.Mutex.mutex
   val TodoApp = ScalaComponent.builder[Unit]
     .initialState(State(Nil, ""))
-    .renderBackend[Backend]
+    .render_C()
     .build
 
 }

@@ -38,7 +38,7 @@ object RegisterTest extends TestSuite {
     val reg = new Register(NameGen.numbered(), MacroName.Use, ErrorHandler.noisy)
     implicit def cnh: ClassNameHint = ClassNameHint("blah")
 
-    "registerS" - {
+    test("registerS") - {
       val a1 = reg registerS ss1
       val a2 = reg registerS ss2
       val a3 = reg registerS ss3
@@ -52,7 +52,7 @@ object RegisterTest extends TestSuite {
       assertEq(css.size, 4)
     }
 
-    "registerF" - {
+    test("registerF") - {
       def test[I](f: I => StyleA, d: List[I]): Unit = {
         d.foreach { i =>
           assert(f(i) eq f(i))

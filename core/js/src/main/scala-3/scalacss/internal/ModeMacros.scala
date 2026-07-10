@@ -28,28 +28,24 @@ object ModeMacros {
     def fail(msg: String): Nothing =
       report.throwError(msg)
 
-    type S = Exports with mutable.Settings
-    val expr: Expr[S] =
-      readConfig("scalacss.mode") match {
+    readConfig("scalacss.mode") match {
 
-        case None =>
-          '{
-            if (_root_.scala.scalajs.LinkingInfo.developmentMode)
-              _root_.scalacss.DevDefaults
-            else
-              _root_.scalacss.ProdDefaults
-          }
+      case None =>
+        '{
+          if (_root_.scala.scalajs.LinkingInfo.developmentMode)
+            _root_.scalacss.DevDefaults
+          else
+            _root_.scalacss.ProdDefaults
+        }
 
-        case Some("dev") =>
-          '{ scalacss.DevDefaults }
+      case Some("dev") =>
+        '{ scalacss.DevDefaults }
 
-        case Some("prod") =>
-          '{ scalacss.ProdDefaults }
+      case Some("prod") =>
+        '{ scalacss.ProdDefaults }
 
-        case Some(x) =>
-          fail(s"Unrecognise option for scalacss.mode: $x. Legal values are 'dev' and 'prod'.")
-      }
-
-    Inlined(None, Nil, expr.asTerm).asExprOf[S]
+      case Some(x) =>
+        fail(s"Unrecognise option for scalacss.mode: $x. Legal values are 'dev' and 'prod'.")
+    }
   }
 }

@@ -44,8 +44,8 @@ object ScalaCssBuild {
 
   val commonSettings = ConfigureBoth(
     _.settings(
-      scalaVersion                  := Ver.scala2,
-      crossScalaVersions            := Seq(Ver.scala2, Ver.scala3),
+      scalaVersion                  := Ver.scala3,
+      crossScalaVersions            := Seq(Ver.scala3, Ver.scala2),
       scalacOptions                ++= scalacCommonFlags,
       scalacOptions                ++= scalac2Flags.filter(_ => scalaVersion.value.startsWith("2")),
       scalacOptions                ++= scalac3Flags.filter(_ => scalaVersion.value.startsWith("3")),
@@ -83,6 +83,7 @@ object ScalaCssBuild {
       definesMacros,
       utestSettings)
     .settings(
+      scalaVersion := "3.8.4",
       libraryDependencies ++= Seq(
         Dep.univEq.value,
         Dep.nyayaGen.value % Test,

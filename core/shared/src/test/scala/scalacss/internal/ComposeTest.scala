@@ -80,35 +80,35 @@ object ComposeTest extends TestSuite {
   }
 
   override def tests = Tests {
-    "props"   - propTest.mustSatisfyE(_.all) //(defaultPropSettings.setSampleSize(2000))
-    "issue25" - Issue25.test()
+    test("props")   - propTest.mustSatisfyE(_.all) //(defaultPropSettings.setSampleSize(2000))
+    test("issue25") - Issue25.test()
 
-    "values" - {
+    test("values") - {
       import Dsl._
       implicit def c: Compose = Compose.safe
 
-      def test(s: StyleS)(avs: AV*)(ws: String*): Unit = {
+      def test2(s: StyleS)(avs: AV*)(ws: String*): Unit = {
         assertEq(s.data(Cond.empty).avIterator.toVector, avs.toVector)
         assertEq(s.warnings.map(_.msg), ws.toVector)
       }
 
-      "idempotency" - {
+      test("idempotency") - {
         val a = style(display.block)
-        test(a compose a)(AV(display, "block"))()
+        test2(a compose a)(AV(display, "block"))()
       }
 
-      "sameKey" -
-        test(style(display.block) compose style(display.inline))(
+      test("sameKey") -
+        test2(style(display.block) compose style(display.inline))(
           AV(display, "block"), AV(display, "inline")
         )("{display: inline} conflicts with {display: block}")
 
-      "marginN1" -
-        test(style(margin.auto) compose style(marginLeft.`0`))(
+      test("marginN1") -
+        test2(style(margin.auto) compose style(marginLeft.`0`))(
           AV(margin, "auto"), AV(marginLeft, "0")
         )("{margin-left: 0} conflicts with {margin: auto}")
 
-      "margin1N" -
-        test(style(marginLeft.`0`) compose style(margin.auto))(
+      test("margin1N") -
+        test2(style(marginLeft.`0`) compose style(margin.auto))(
           AV(marginLeft, "0"), AV(margin, "auto")
         )("{margin: auto} conflicts with {margin-left: 0}")
 
